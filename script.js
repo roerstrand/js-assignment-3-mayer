@@ -1,4 +1,4 @@
-// Basic math operations
+// Basic math operations functions
 function add(a, b) {
     return a + b;
 }
@@ -12,8 +12,11 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) return "Can't divide by 0!";
-    return a / b;
+    const result = a / b;
+    if (result === Infinity || result === -Infinity) {
+        display.textContent = "∞";
+    }
+    return result;
 }
 
 function operate(operator, a, b) {
@@ -27,6 +30,30 @@ function operate(operator, a, b) {
         default: return null;
     }
 }
+
+// Additional functions for calculator operations
+
+function clearCalculator() {
+    displayValue = '';
+    firstOperand = null;
+    operator = null;
+    awaitingSecondOperand = false;
+    updateDisplay();
+}
+
+function addDecimal() {
+    if (!displayValue.includes('.')) {
+        displayValue += '.';
+        updateDisplay();
+    }
+}
+
+function backspace() {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay();
+}
+
+// Display management and operations
 
 let displayValue = '';
 let firstOperand = null;
@@ -77,26 +104,6 @@ function handleEquals() {
         awaitingSecondOperand = false;
         updateDisplay();
     }
-}
-
-function clearCalculator() {
-    displayValue = '';
-    firstOperand = null;
-    operator = null;
-    awaitingSecondOperand = false;
-    updateDisplay();
-}
-
-function addDecimal() {
-    if (!displayValue.includes('.')) {
-        displayValue += '.';
-        updateDisplay();
-    }
-}
-
-function backspace() {
-    displayValue = displayValue.slice(0, -1);
-    updateDisplay();
 }
 
 document.querySelectorAll('.number').forEach(button =>
