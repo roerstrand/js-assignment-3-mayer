@@ -3,7 +3,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-x: hidden;
+
     background: #f0f0f0;
     margin: 0;
 }
