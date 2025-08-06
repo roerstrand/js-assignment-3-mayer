@@ -4,17 +4,6 @@ A fully functional, keyboard-accessible calculator built with HTML, CSS, and Jav
 
 ---
 
-## 📁 Project Structure
-
-```
-calculator/
-├── index.html       # Calculator structure
-├── style.css        # Styling and layout
-└── script.js        # JavaScript logic
-```
-
----
-
 ## 🚀 Features
 
 - ✅ Basic math operations: Add, Subtract, Multiply, Divide
@@ -24,33 +13,7 @@ calculator/
 - ✅ Backspace to delete last digit
 - ✅ Clear button resets all inputs
 - ✅ Keyboard support for all functionality
-- ✅ Responsive layout with clean UI
-
----
-
-## 🎮 Usage
-
-### 1. Clone or Download
-
-```
-git clone https://github.com/your-username/js-calculator.git
-cd js-calculator
-```
-
-### 2. Open in Browser
-
-Open `index.html` in your preferred browser.
-
----
-
-## ⌨️ Keyboard Shortcuts
-
-- Numbers: `0-9`
-- Operators: `+`, `-`, `*`, `/`
-- Equals: `=`, `Enter`
-- Decimal: `.`
-- Clear: `C` or `c`
-- Backspace: `Backspace`
+- ✅ Responsive layout with clean UI, custom fonts
 
 ---
 
