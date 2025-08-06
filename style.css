@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Share Tech Mono';
+    src: url('./fonts/Roboto,Share_Tech_Mono/Roboto/static/Roboto_Condensed-ExtraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,19 +15,20 @@ body {
     min-width: 100vw;
     overflow-x: hidden;
 
-    background: #f0f0f0;
+    background: #fff7f7;
     margin: 0;
 }
 
 #calculator {
-    background: #222;
+    background: #2d2c2c;
     padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+    width: 18.75rem;
 }
 
 #display {
+    font-family: 'Share Tech Mono', sans-serif;
     background: #000;
     color: #0f0;
     font-size: 2rem;
@@ -58,14 +66,19 @@ button.operator {
     color: #000;
 }
 
-button#clear,
-button#equals,
-button#backspace {
-    background: #d00;
+button#clear {
+    background: rgb(91, 0, 0);
     color: #fff;
 }
 
 button.decimal {
-    background: #0099cc;
+    background: #ba46a1;
     color: #fff;
+}
+
+#bottom {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
 }

@@ -1,4 +1,5 @@
 // Basic math operations functions
+
 function add(a, b) {
     return a + b;
 }
@@ -19,7 +20,9 @@ function divide(a, b) {
     return result;
 }
 
-function operate(operator, a, b) {
+// Math operation switch-handler
+
+function operate(a, operator, b) {
     a = parseFloat(a);
     b = parseFloat(b);
     switch (operator) {
@@ -31,29 +34,7 @@ function operate(operator, a, b) {
     }
 }
 
-// Additional functions for calculator operations
-
-function clearCalculator() {
-    displayValue = '';
-    firstOperand = null;
-    operator = null;
-    awaitingSecondOperand = false;
-    updateDisplay();
-}
-
-function addDecimal() {
-    if (!displayValue.includes('.')) {
-        displayValue += '.';
-        updateDisplay();
-    }
-}
-
-function backspace() {
-    displayValue = displayValue.slice(0, -1);
-    updateDisplay();
-}
-
-// Display management and operations
+// Global variables and initial setup
 
 let displayValue = '';
 let firstOperand = null;
@@ -66,6 +47,8 @@ function updateDisplay() {
     display.textContent = displayValue || '0';
 }
 
+// Handle number input from .number buttons and keyboard input
+
 function handleNumber(number) {
     if (awaitingSecondOperand) {
         displayValue = number;
@@ -76,17 +59,20 @@ function handleNumber(number) {
     updateDisplay();
 }
 
+// Handle operator and intermediary steps in calculation chains (eg. 1+1 = 2, then new function call for 2*2 = 4)
+
 function handleOperator(nextOperator) {
-    if (operator && awaitingSecondOperand) {
+    if (operator && awaitingSecondOperand) { // if an operator is already set, return early to avoid double operators eg. "+ -"
         operator = nextOperator;
         return;
     }
 
-    if (firstOperand == null) {
+    if (firstOperand == null) { // if no firstOperand stored, assign displayValue to firstOperand variable
         firstOperand = parseFloat(displayValue);
+
     } else if (operator) {
-        const result = operate(operator, firstOperand, displayValue);
-        displayValue = String(Math.round(result * 1000) / 1000);
+        const result = operate(firstOperand, operator, displayValue);
+        displayValue = String(Math.round(result * 1000) / 1000); // To prevent floating point errors based on binary data
         firstOperand = parseFloat(displayValue);
     }
 
@@ -95,9 +81,13 @@ function handleOperator(nextOperator) {
     updateDisplay();
 }
 
+// Finalize current calculation with operate function and reset global setup variables
+
 function handleEquals() {
     if (operator && firstOperand !== null) {
-        const result = operate(operator, firstOperand, displayValue);
+
+        const result = operate(firstOperand, operator, displayValue);
+
         displayValue = String(result);
         firstOperand = null;
         operator = null;
@@ -105,6 +95,8 @@ function handleEquals() {
         updateDisplay();
     }
 }
+
+// Adding handleNumber and handleOperator functions to dom buttons
 
 document.querySelectorAll('.number').forEach(button =>
     button.addEventListener('click', () => handleNumber(button.textContent))
@@ -114,10 +106,48 @@ document.querySelectorAll('.operator').forEach(button =>
     button.addEventListener('click', () => handleOperator(button.textContent))
 );
 
-document.getElementById('equals').addEventListener('click', handleEquals);
-document.getElementById('clear').addEventListener('click', clearCalculator);
-document.getElementById('backspace').addEventListener('click', backspace);
-document.querySelector('.decimal').addEventListener('click', addDecimal);
+// Inline event listener function for equals button
+
+document.getElementById('equals').addEventListener('click', () => {
+    if (operator && firstOperand !== null) {
+        const result = operate(firstOperand, operator, displayValue);
+        displayValue = String(result);
+        firstOperand = null;
+        operator = null;
+        awaitingSecondOperand = false;
+        updateDisplay();
+    }
+});
+
+// Inline event listener function for clear button
+
+document.getElementById('clear').addEventListener('click', () => {
+    displayValue = '';
+    firstOperand = null;
+    operator = null;
+    awaitingSecondOperand = false;
+    updateDisplay();
+});
+
+// Inline event listener function for backspace button
+
+document.getElementById('backspace').addEventListener('click', () => {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay();
+});
+
+// Inline event listener function for decimal button. Prevent adding multiple decimals in a number
+
+document.querySelector('.decimal').addEventListener('click', () => {
+    if (!displayValue.includes('.')) {
+        displayValue += '.';
+        updateDisplay();
+    }
+});
+
+// Keyboard event listener for calculator operations
+// Allows the calculator to be used with keyboard input as well
+// Listens for keydown events and calls the respective functions
 
 document.addEventListener('keydown', (e) => {
     if (!isNaN(e.key)) {
