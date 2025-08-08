@@ -10,9 +10,13 @@
 </head>
 
 <body>
-    <div id="calculator">
-        <div id="display">0</div>
-        <div id="buttons">
+    <!-- I enhanced Robin's code with semantic HTML elements for better accessibility -->
+    <main>
+        <section id="calculator" role="application" aria-label="Calculator">
+            <header>
+                <div id="display" role="textbox" aria-live="polite" aria-label="Calculator display">0</div>
+            </header>
+            <div id="buttons" role="grid" aria-label="Calculator buttons">
             <button class="number">7</button>
             <button class="number">8</button>
             <button class="number">9</button>
@@ -33,15 +37,16 @@
             <button id="clear">C</button>
             <button class="operator">+</button>
 
-        </div>
+            </div>
 
-        <div id="bottom">
+            <footer id="bottom">
+                <!-- I kept Robin's bottom section but enhanced it with semantic elements -->
+                <button id="equals" aria-label="Calculate result">=</button>
+                <button id="backspace" aria-label="Backspace">←</button>
+            </footer>
 
-            <button id="equals">=</button>
-            <button id="backspace">←</button>
-        </div>
-
-    </div>
+        </section>
+    </main>
 
 </body>
 

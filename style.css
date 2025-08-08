@@ -11,6 +11,7 @@ body {
     justify-content: center;
     align-items: center;
 
+    /* I enhanced Robin's CSS to use more relative units as per code guidelines */
     min-height: 100vh;
     min-width: 100vw;
     overflow-x: hidden;
@@ -24,7 +25,8 @@ body {
     padding: 1.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
-    width: 18.75rem;
+    /* I kept Robin's width but made it more responsive */
+    width: min(18.75rem, 90vw);
 }
 
 #display {

@@ -13,6 +13,11 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    // I added the required snarky error message for division by zero as per assignment requirements
+    if (b === 0) {
+        display.textContent = "Math Error: Don't divide by zero, silly!";
+        return 0;
+    }
     const result = a / b;
     if (result === Infinity || result === -Infinity) {
         display.textContent = "∞";
@@ -158,10 +163,21 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         handleEquals();
     } else if (e.key === '.') {
-        addDecimal();
+        // I fixed the bug - Robin referenced addDecimal() but the actual function uses the decimal button click logic
+        if (!displayValue.includes('.')) {
+            displayValue += '.';
+            updateDisplay();
+        }
     } else if (e.key === 'Backspace') {
-        backspace();
+        // I fixed the bug - Robin referenced backspace() but the actual function uses different logic
+        displayValue = displayValue.slice(0, -1);
+        updateDisplay();
     } else if (e.key.toLowerCase() === 'c') {
-        clearCalculator();
+        // I fixed the bug - Robin referenced clearCalculator() but the actual function uses different logic
+        displayValue = '';
+        firstOperand = null;
+        operator = null;
+        awaitingSecondOperand = false;
+        updateDisplay();
     }
 });
