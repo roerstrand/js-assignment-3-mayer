@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🧮 Ultimate Calculator Pro</title>
     <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="./script.js" defer></script>
 </head>
 
-<body data-theme="system">
+<body data-theme="system" id="top">
     <div class="app-container">
         <header class="main-header">
             <div class="header-content">
@@ -22,7 +24,7 @@
                 </h1>
                 <p class="app-subtitle">Professional Mathematical Computing</p>
             </div>
-            
+
             <div class="header-controls">
                 <div class="theme-toggle" id="themeToggle">
                     <button class="theme-btn" data-theme="light" title="Light Mode">
@@ -115,34 +117,53 @@
                                 </div>
                             </div>
                             <div class="scientific-row">
-                                <button class="btn btn-scientific" onclick="scientificFunction('sin')" title="Sine">sin</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('cos')" title="Cosine">cos</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('tan')" title="Tangent">tan</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('asin')" title="Arc Sine">sin⁻¹</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('sin')"
+                                    title="Sine">sin</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('cos')"
+                                    title="Cosine">cos</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('tan')"
+                                    title="Tangent">tan</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('asin')"
+                                    title="Arc Sine">sin⁻¹</button>
                             </div>
                             <div class="scientific-row">
-                                <button class="btn btn-scientific" onclick="scientificFunction('acos')" title="Arc Cosine">cos⁻¹</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('atan')" title="Arc Tangent">tan⁻¹</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('log')" title="Log base 10">log</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('ln')" title="Natural logarithm">ln</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('acos')"
+                                    title="Arc Cosine">cos⁻¹</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('atan')"
+                                    title="Arc Tangent">tan⁻¹</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('log')"
+                                    title="Log base 10">log</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('ln')"
+                                    title="Natural logarithm">ln</button>
                             </div>
                             <div class="scientific-row">
-                                <button class="btn btn-scientific" onclick="scientificFunction('sqrt')" title="Square root">√</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('pow')" title="Square">x²</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('cube')" title="Cube">x³</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('powY')" title="Power of Y">xʸ</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('sqrt')"
+                                    title="Square root">√</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('pow')"
+                                    title="Square">x²</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('cube')"
+                                    title="Cube">x³</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('powY')"
+                                    title="Power of Y">xʸ</button>
                             </div>
                             <div class="scientific-row">
-                                <button class="btn btn-scientific" onclick="scientificFunction('factorial')" title="Factorial">x!</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('inverse')" title="Reciprocal">1/x</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('percent')" title="Percentage">%</button>
-                                <button class="btn btn-scientific" onclick="scientificFunction('exp')" title="e to the power of x">eˣ</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('factorial')"
+                                    title="Factorial">x!</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('inverse')"
+                                    title="Reciprocal">1/x</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('percent')"
+                                    title="Percentage">%</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('exp')"
+                                    title="e to the power of x">eˣ</button>
                             </div>
                             <div class="scientific-row">
                                 <button class="btn btn-constant" onclick="addConstant('pi')" title="Pi">π</button>
-                                <button class="btn btn-constant" onclick="addConstant('e')" title="Euler's number">e</button>
-                                <button class="btn btn-function" onclick="toggleAngleMode()" id="angleMode" title="Toggle Degrees/Radians">DEG</button>
-                                <button class="btn btn-function" onclick="scientificFunction('abs')" title="Absolute value">|x|</button>
+                                <button class="btn btn-constant" onclick="addConstant('e')"
+                                    title="Euler's number">e</button>
+                                <button class="btn btn-function" onclick="toggleAngleMode()" id="angleMode"
+                                    title="Toggle Degrees/Radians">DEG</button>
+                                <button class="btn btn-function" onclick="scientificFunction('abs')"
+                                    title="Absolute value">|x|</button>
                             </div>
                         </div>
                     </div>
@@ -185,8 +206,16 @@
                         <span class="badge">Responsive</span>
                     </div>
                 </div>
+
+                <p class="back-to-top"><a href="#top">Back to top ↑</a></p>
+                <p class="legal">
+                    © 2025 Robin Erik Strandberg &amp; Abdulrahman Alfaiadi. Created during the Frontend Developer
+                    Trainee Program at
+                    Mayerfeld Consulting. All rights reserved.
+                </p>
             </div>
         </footer>
+
     </div>
 
     <div id="tutorial-modal" class="modal">
@@ -225,7 +254,8 @@
                     <div class="tutorial-examples">
                         <div class="example" onclick="runExample('12 + 7 - 5 * 3')">
                             <strong>Order of Operations:</strong> 12 + 7 - 5 × 3
-                            <p class="explanation">Calculated step by step: (12 + 7) = 19, (19 - 5) = 14, (14 × 3) = 42</p>
+                            <p class="explanation">Calculated step by step: (12 + 7) = 19, (19 - 5) = 14, (14 × 3) = 42
+                            </p>
                             <button class="try-btn">Try it!</button>
                         </div>
                     </div>
@@ -234,16 +264,19 @@
                 <div class="tutorial-section">
                     <h3>🧮 Pro Tips</h3>
                     <ul class="tips-list">
-                        <li><strong>Memory Functions:</strong> Store frequently used numbers with MS, recall with MR</li>
+                        <li><strong>Memory Functions:</strong> Store frequently used numbers with MS, recall with MR
+                        </li>
                         <li><strong>Quick Clear:</strong> Use AC for all clear, CE for current entry</li>
                         <li><strong>Copy Results:</strong> Click the copy button to save results to clipboard</li>
-                        <li><strong>Keyboard Speed:</strong> Use number pad and operators for lightning-fast calculations</li>
-                        <li><strong>Scientific Mode:</strong> Switch modes for advanced functions like sin, cos, log</li>
+                        <li><strong>Keyboard Speed:</strong> Use number pad and operators for lightning-fast
+                            calculations</li>
+                        <li><strong>Scientific Mode:</strong> Switch modes for advanced functions like sin, cos, log
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <div id="formula-modal" class="modal">
         <div class="modal-content">
