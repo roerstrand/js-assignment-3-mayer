@@ -4,45 +4,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Calculator</title>
+    <title>🧮 Ultimate Calculator Pro</title>
     <link rel="stylesheet" href="./style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="./script.js" defer></script>
 </head>
 
-<body>
-    <div id="calculator">
-        <div id="display">0</div>
-        <div id="buttons">
-            <button class="number">7</button>
-            <button class="number">8</button>
-            <button class="number">9</button>
-            <button class="operator">/</button>
+<body data-theme="system" id="top">
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i class="fas fa-calculator"></i>
+                    Ultimate Calculator Pro
+                    <span class="pro-badge">PRO</span>
+                </h1>
+                <p class="app-subtitle">Professional Mathematical Computing</p>
+            </div>
 
-            <button class="number">4</button>
-            <button class="number">5</button>
-            <button class="number">6</button>
-            <button class="operator">*</button>
+            <div class="header-controls">
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="theme-btn" data-theme="light" title="Light Mode">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button class="theme-btn active" data-theme="system" title="System Theme">
+                        <i class="fas fa-desktop"></i>
+                    </button>
+                    <button class="theme-btn" data-theme="dark" title="Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <button class="tutorial-btn" onclick="showTutorial()">
+                    <i class="fas fa-graduation-cap"></i>
+                    Tutorial
+                </button>
+            </div>
+        </header>
 
-            <button class="number">1</button>
-            <button class="number">2</button>
-            <button class="number">3</button>
-            <button class="operator">-</button>
+        <main class="calculator-main">
+            <div class="calculator-container">
+                <section id="calculator" role="application" aria-label="Calculator">
+                    <div class="calculator-header">
+                        <div class="mode-selector">
+                            <button class="mode-btn active" data-mode="basic" id="basicModeBtn">
+                                <i class="fas fa-calculator"></i>
+                                Basic
+                            </button>
+                            <button class="mode-btn" data-mode="scientific" id="scientificModeBtn">
+                                <i class="fas fa-atom"></i>
+                                Scientific
+                            </button>
+                        </div>
+                        <div class="calculator-status">
+                            <span class="status-indicator"></span>
+                            <span class="status-text">Ready</span>
+                        </div>
+                    </div>
 
-            <button class="number">0</button>
-            <button class="decimal">.</button>
-            <button id="clear">C</button>
-            <button class="operator">+</button>
+                    <div class="display-section">
+                        <div class="expression-display" id="expression">0</div>
+                        <div id="display" role="textbox" aria-live="polite" aria-label="Calculator display">0</div>
+                        <div class="display-info">
+                            <span class="display-label">Result</span>
+                            <button class="copy-btn" onclick="copyResult()" title="Copy result">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
 
-        </div>
+                    <div class="button-container">
+                        <!-- Basic Calculator Grid -->
+                        <div id="basic-buttons" class="calculator-buttons">
+                            <button class="btn btn-function" onclick="clearAll()">AC</button>
+                            <button class="btn btn-function" onclick="clearEntry()">CE</button>
+                            <button class="btn btn-function" onclick="backspace()">
+                                <i class="fas fa-backspace"></i>
+                            </button>
+                            <button class="btn btn-operator" onclick="handleOperator('/')" data-op="/">÷</button>
 
-        <div id="bottom">
+                            <button class="btn btn-number" onclick="handleNumber('7')">7</button>
+                            <button class="btn btn-number" onclick="handleNumber('8')">8</button>
+                            <button class="btn btn-number" onclick="handleNumber('9')">9</button>
+                            <button class="btn btn-operator" onclick="handleOperator('*')" data-op="*">×</button>
 
-            <button id="equals">=</button>
-            <button id="backspace">←</button>
-        </div>
+                            <button class="btn btn-number" onclick="handleNumber('4')">4</button>
+                            <button class="btn btn-number" onclick="handleNumber('5')">5</button>
+                            <button class="btn btn-number" onclick="handleNumber('6')">6</button>
+                            <button class="btn btn-operator" onclick="handleOperator('-')" data-op="-">−</button>
+
+                            <button class="btn btn-number" onclick="handleNumber('1')">1</button>
+                            <button class="btn btn-number" onclick="handleNumber('2')">2</button>
+                            <button class="btn btn-number" onclick="handleNumber('3')">3</button>
+                            <button class="btn btn-operator" onclick="handleOperator('+')" data-op="+">+</button>
+
+                            <button class="btn btn-number btn-zero" onclick="handleNumber('0')">0</button>
+                            <button class="btn btn-number" onclick="addDecimal()">.</button>
+                            <button class="btn btn-equals" onclick="handleEquals()" id="equalsBtn">
+                                <i class="fas fa-equals"></i>
+                            </button>
+                        </div>
+
+                        <!-- Scientific Functions Panel (appears above basic buttons in scientific mode) -->
+                        <div id="scientific-functions" class="scientific-panel" style="display: none;">
+                            <div class="scientific-header">
+                                <h3><i class="fas fa-atom"></i> Scientific Functions</h3>
+                                <div class="angle-mode-display">
+                                    <span class="angle-label">Angle Mode:</span>
+                                    <span class="angle-value" id="angleModeDisplay">DEG</span>
+                                </div>
+                            </div>
+                            <div class="scientific-row">
+                                <button class="btn btn-scientific" onclick="scientificFunction('sin')"
+                                    title="Sine">sin</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('cos')"
+                                    title="Cosine">cos</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('tan')"
+                                    title="Tangent">tan</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('asin')"
+                                    title="Arc Sine">sin⁻¹</button>
+                            </div>
+                            <div class="scientific-row">
+                                <button class="btn btn-scientific" onclick="scientificFunction('acos')"
+                                    title="Arc Cosine">cos⁻¹</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('atan')"
+                                    title="Arc Tangent">tan⁻¹</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('log')"
+                                    title="Log base 10">log</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('ln')"
+                                    title="Natural logarithm">ln</button>
+                            </div>
+                            <div class="scientific-row">
+                                <button class="btn btn-scientific" onclick="scientificFunction('sqrt')"
+                                    title="Square root">√</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('pow')"
+                                    title="Square">x²</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('cube')"
+                                    title="Cube">x³</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('powY')"
+                                    title="Power of Y">xʸ</button>
+                            </div>
+                            <div class="scientific-row">
+                                <button class="btn btn-scientific" onclick="scientificFunction('factorial')"
+                                    title="Factorial">x!</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('inverse')"
+                                    title="Reciprocal">1/x</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('percent')"
+                                    title="Percentage">%</button>
+                                <button class="btn btn-scientific" onclick="scientificFunction('exp')"
+                                    title="e to the power of x">eˣ</button>
+                            </div>
+                            <div class="scientific-row">
+                                <button class="btn btn-constant" onclick="addConstant('pi')" title="Pi">π</button>
+                                <button class="btn btn-constant" onclick="addConstant('e')"
+                                    title="Euler's number">e</button>
+                                <button class="btn btn-function" onclick="toggleAngleMode()" id="angleMode"
+                                    title="Toggle Degrees/Radians">DEG</button>
+                                <button class="btn btn-function" onclick="scientificFunction('abs')"
+                                    title="Absolute value">|x|</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="calculator-sidebar">
+                    <div class="history-section">
+                        <h3><i class="fas fa-history"></i> History</h3>
+                        <div class="history-list" id="history">
+                            <div class="empty-state">No calculations yet</div>
+                        </div>
+                        <button class="clear-history-btn" onclick="clearHistory()">
+                            <i class="fas fa-trash"></i>
+                            Clear History
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="shortcuts">
+                    <h4>Keyboard Shortcuts</h4>
+                    <div class="shortcut-grid">
+                        <span><kbd>0-9</kbd> Numbers</span>
+                        <span><kbd>+</kbd><kbd>-</kbd><kbd>*</kbd><kbd>/</kbd> Operators</span>
+                        <span><kbd>Enter</kbd> Calculate</span>
+                        <span><kbd>Esc</kbd> Clear</span>
+                        <span><kbd>.</kbd> Decimal</span>
+                        <span><kbd>Backspace</kbd> Delete</span>
+                    </div>
+                </div>
+                <div class="app-info">
+                    <p>Built with advanced mathematics and user experience in mind</p>
+                    <div class="tech-badges">
+                        <span class="badge">HTML5</span>
+                        <span class="badge">CSS3</span>
+                        <span class="badge">JavaScript ES6+</span>
+                        <span class="badge">Responsive</span>
+                    </div>
+                </div>
+
+                <p class="back-to-top"><a href="#top">Back to top ↑</a></p>
+                <p class="legal">
+                    © 2025 Robin Erik Strandberg &amp; Abdulrahman Alfaiadi. Created during the Frontend Developer
+                    Trainee Program at
+                    Mayerfeld Consulting. All rights reserved.
+                </p>
+            </div>
+        </footer>
 
     </div>
 
+    <div id="tutorial-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📚 Interactive Math Tutorial</h2>
+                <button class="close-btn" onclick="closeTutorial()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tutorial-section">
+                    <h3>🔢 Basic Operations</h3>
+                    <div class="tutorial-examples">
+                        <div class="example" onclick="runExample('25 + 17')">
+                            <strong>Addition:</strong> 25 + 17 = 42
+                            <button class="try-btn">Try it!</button>
+                        </div>
+                        <div class="example" onclick="runExample('100 - 37')">
+                            <strong>Subtraction:</strong> 100 - 37 = 63
+                            <button class="try-btn">Try it!</button>
+                        </div>
+                        <div class="example" onclick="runExample('12 * 8')">
+                            <strong>Multiplication:</strong> 12 × 8 = 96
+                            <button class="try-btn">Try it!</button>
+                        </div>
+                        <div class="example" onclick="runExample('144 / 12')">
+                            <strong>Division:</strong> 144 ÷ 12 = 12
+                            <button class="try-btn">Try it!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-section">
+                    <h3>🔗 Chained Operations</h3>
+                    <div class="tutorial-examples">
+                        <div class="example" onclick="runExample('12 + 7 - 5 * 3')">
+                            <strong>Order of Operations:</strong> 12 + 7 - 5 × 3
+                            <p class="explanation">Calculated step by step: (12 + 7) = 19, (19 - 5) = 14, (14 × 3) = 42
+                            </p>
+                            <button class="try-btn">Try it!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-section">
+                    <h3>🧮 Pro Tips</h3>
+                    <ul class="tips-list">
+                        <li><strong>Memory Functions:</strong> Store frequently used numbers with MS, recall with MR
+                        </li>
+                        <li><strong>Quick Clear:</strong> Use AC for all clear, CE for current entry</li>
+                        <li><strong>Copy Results:</strong> Click the copy button to save results to clipboard</li>
+                        <li><strong>Keyboard Speed:</strong> Use number pad and operators for lightning-fast
+                            calculations</li>
+                        <li><strong>Scientific Mode:</strong> Switch modes for advanced functions like sin, cos, log
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="formula-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="formula-title">Formula Calculator</h2>
+                <button class="close-btn" onclick="closeFormulaModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="formula-content">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
