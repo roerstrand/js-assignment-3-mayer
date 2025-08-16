@@ -765,6 +765,7 @@ body {
     display: grid;
     gap: 1rem;
     text-align: center;
+    overflow: hidden;
 }
 
 /* Two tidy cards */
@@ -786,8 +787,8 @@ body {
 /* Pill-like shortcut items */
 .shortcut-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
     font-size: 0.85rem;
 }
 
@@ -801,6 +802,9 @@ body {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 
 kbd {
@@ -812,6 +816,7 @@ kbd {
     font-family: 'Orbitron', monospace;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-sm);
+    white-space: nowrap;
 }
 
 /* Tech badges row */

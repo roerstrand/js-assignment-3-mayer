@@ -237,8 +237,16 @@ function getOperatorSymbol(op) {
 
 function handleOperator(nextOperator) {
     const inputValue = parseFloat(calculatorState.displayValue);
-
     setStatus('processing', 'Processing...');
+
+    // ✅ If user is switching operators before entering the next number,
+    // just replace the operator and update the expression display.
+    if (calculatorState.awaitingOperand && calculatorState.firstOperand !== null) {
+        calculatorState.operator = nextOperator;
+        updateExpressionDisplay();
+        setTimeout(() => setStatus('ready', 'Ready'), 300);
+        return;
+    }
 
     if (calculatorState.firstOperand === null) {
         calculatorState.firstOperand = inputValue;
@@ -249,8 +257,10 @@ function handleOperator(nextOperator) {
         calculatorState.displayValue = String(newValue);
         calculatorState.firstOperand = newValue;
 
-        // Add to history
-        addToHistory(`${formatNumber(currentValue)} ${getOperatorSymbol(calculatorState.operator)} ${formatNumber(inputValue)} = ${formatNumber(newValue)}`);
+        addToHistory(
+            `${formatNumber(currentValue)} ${getOperatorSymbol(calculatorState.operator)} ` +
+            `${formatNumber(inputValue)} = ${formatNumber(newValue)}`
+        );
     }
 
     calculatorState.awaitingOperand = true;
